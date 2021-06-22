@@ -1,4 +1,4 @@
-##### hydroponics - a better way to grow food
+#### hydroponics - a better way to grow food
 
 A **raspberry pi** (Zero W) based project for growing plants with a hydroponic system.
 
