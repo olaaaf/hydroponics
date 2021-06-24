@@ -17,6 +17,9 @@ class PWM:
             self.hardware = False
             self.thread = threading.Thread(target=self.thread_update, name="PWM Thread on GPIO port " + str(port))
 
+    def turn_off(self):
+        self.pi.write(self.port, 0)
+
     def change_percentage(self, percentage):
         self.percentage = percentage 
         self.start()
