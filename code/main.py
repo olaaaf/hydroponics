@@ -1,18 +1,19 @@
-from gpiozero import *
-from pwm import *
+import pigpio
 import time
-import _thread
+from pwm import *
+
+pi = pigpio.pi()
+pump = PWM(pi, 18, 100) 
 
 def main():
-    percentage = 5.0
-    port = PWM(4, percentage)
-    port.start()
-    for i in range(100):
-        port.change_part(i)
-        time.sleep(0.07)
-    input()
-    print("Exiting...")
-    port.stop()
+    pump.start()
+
+def close():
+    pump.stop()
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        close()        
+        print ("Pumped turned off")
