@@ -9,7 +9,8 @@ The physical model - a literal PVC pipe connected by two 32 to 6 mm adapters (th
 Future changes and documentation will appear here.
 
 ##### Dependencies
-pigpio
+**pigpio
+**
 To install use:
 ```
 wget https://github.com/joan2937/pigpio/archive/master.zip
