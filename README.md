@@ -9,12 +9,12 @@ The physical model - a literal PVC pipe connected by two 32 to 6 mm adapters (th
 Future changes and documentation will appear here.
 
 ##### Dependencies
-flask - used to host the website
+pigpio
 To install use:
 ```
-sudo apt install python3.7-venv
-cd code
-python3 -m venv venv
-. venv/bin/activate
-pip install flask
+wget https://github.com/joan2937/pigpio/archive/master.zip
+unzip master.zip
+cd pigpio-master
+make
+sudo make install
 ```
