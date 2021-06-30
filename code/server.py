@@ -2,9 +2,9 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 import os
 import json
+import pathlib
 
-web_dir = os.path.join(os.path.dirname(__file__), 'website')
-server_adress = ('', 8000)
+server_adress = ('', 80)
 
 class Handler(BaseHTTPRequestHandler):
     
@@ -15,18 +15,28 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self._set_response()
-        file = open('website/index.html', 'rb')
+        file = None
+        if self.path == '/' or self.path == '/index.html':   
+            file = open('website/index.html', 'rb')
+        else:
+            if os.path.isfile('website/' +self.path):
+                file = open('website/' + self.path, 'rb')
+            else:
+                #Handle 404 Request
+                file = open('website/404.html', 'rb') 
         self.wfile.write(file.read())
 
     def do_POST(self):
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
         post_data = self.rfile.read(content_length) # <--- Gets the data itself
         data_json = json.loads(post_data.decode('utf8').replace("'", '"'))
-        data_json["param1"] += 100
+        with open('settings.json', 'w', encoding='utf-8') as file:
+            json.dump(data_json, file)
         self._set_response('application/json')
         self.wfile.write(json.dumps(data_json).encode('utf-8')) 
 
 def main():
+    os.chdir(pathlib.Path(__file__).parent.resolve())
     server = HTTPServer(server_address=server_adress, RequestHandlerClass=Handler)
     try:
         server.serve_forever()
