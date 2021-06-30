@@ -4,8 +4,6 @@ import os
 import json
 import pathlib
 
-server_adress = ('', 80)
-
 class Handler(BaseHTTPRequestHandler):
     
     def _set_response(self, type='text/html'):
@@ -30,12 +28,13 @@ class Handler(BaseHTTPRequestHandler):
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
         post_data = self.rfile.read(content_length) # <--- Gets the data itself
         data_json = json.loads(post_data.decode('utf8').replace("'", '"'))
-        with open('settings.json', 'w', encoding='utf-8') as file:
+        with open('test.json', 'w', encoding='utf-8') as file:
             json.dump(data_json, file)
         self._set_response('application/json')
         self.wfile.write(json.dumps(data_json).encode('utf-8')) 
 
-def main():
+def start_server(port=80):
+    server_adress = ('', port)
     os.chdir(pathlib.Path(__file__).parent.resolve())
     server = HTTPServer(server_address=server_adress, RequestHandlerClass=Handler)
     try:
@@ -46,4 +45,4 @@ def main():
     logging.info('Stopping http server...\n')
 
 if __name__=="__main__":
-    main()
+    start_server()

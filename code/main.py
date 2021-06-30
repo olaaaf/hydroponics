@@ -1,13 +1,16 @@
-import pigpio
+#import pigpio
 import time
-from pwm import *
+#from pwm import *
 from server import *
+from settings import *
 
-pi = pigpio.pi()
-pump = PWM(pi, 18, 20) 
+#pi = pigpio.pi()
+#pump = PWM(pi, 18, 20) 
 
 def main():
-    pass
+    settings = Settings()
+    if (settings.get_start_server()):
+        start_server(settings.get_port())
 
 def close():
     pump.stop()
