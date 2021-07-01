@@ -39,11 +39,17 @@ class Settings:
                 self.current_settings[key] = default_settings[key]
         return ret
 
+    def get_field(self, field:str):
+        if field in self.current_settings:
+            return self.check_current[field]
+        else:
+             raise Exception("No field called " + field + " in current_settings")
+
     def get_port(self):
-        return self.current_settings["port"]
+        return self.get_field("port")
 
     def get_pump_intensity(self):
-        return self.current_settings["pump_intensity"]
+        return self.get_field("pump_intensity")
     
     def get_start_server(self):
-        return self.current_settings["start_server"]
+        return self.get_field("start_server")
