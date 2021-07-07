@@ -2,26 +2,83 @@
 <html>
     <head>
         <title>Hydroponics</title>
+        <link rel="stylesheet" href="/website/XP.css">
     </head>
-    <body style="background-image: radial-gradient(circle at 50% -20.71%, #e3d0e6 0, #e6cfe4 6.25%, #e9cee1 12.5%, #eccede 18.75%, #eecdda 25%, #f0cdd7 31.25%, #f1cdd4 37.5%, #f2cdd0 43.75%, #f2cdcd 50%, #f2cdca 56.25%, #f1cec7 62.5%, #f0cfc4 68.75%, #efcfc2 75%, #edd0c0 81.25%, #ead1be 87.5%, #e8d2bd 93.75%, #e5d3bc 100%);">
-    <script type="text/javascript">
-        function proceed () {
-            const params = {
-                param1: 2,
-                param2: 5 
-            };
-            const options = {
-                method: 'POST',
-                body: JSON.stringify( params )  
-            };
-            result = fetch( 'http://localhost', options ).then(response => {
-                if (response.status == 200){
-                    return response.text();
-                }else{
-                    console.log("Status: " + response.status);
-                }
-            });
-        }</script>
-        <button class="bttn-gradient bttn-md bttn-primary" type="button" onclick="proceed();" class=".">Heyyy</button> 
+    <body onload="run();"> 
+        
+        <div class="window" style="overflow-y:auto; height:80%; width: 80%; position: fixed; left: 50%; transform: translate(-50%, 0%);">
+            <div class="title-bar">
+                <div class="title-bar-text">Settings</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Help"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <menu role="tablist">
+                    <button aria-selected="true" aria-controls="pump">Pump</button>
+                    <button aria-controls="schedule">Schedule</button>
+                    <button aria-controls="server">Server</button>
+                </menu>
+                <article role="tabpanel" id="pump">
+                    <div class="field-row" style="width: 40%">
+                        <label for="range25">Pump intensity:</label>
+                        <label for="range26">0%</label>
+                        <input id="intensity" type="range" min="0" max="100" value="5" />
+                        <label for="range27">100%</label>
+                    </div>
+                </article>
+                <article role="tabpanel" hidden id="schedule">
+                    <fieldset>
+                        <legend>When to turn off the pump</legend>
+                        <p>Add OFF times in format: <i>HH:MM:SS-HH:MM:SS,HH:MM:SS-HH:MM:SS</i></p>
+                        <div class="field-row-stacked" style="width: 100%;">
+                            <label for="mon">MON</label>
+                            <input type="text" id="mon">
+                        </div>
+                        <div class="field-row-stacked">
+                            <label for="tue">TUE</label>
+                            <input type="text" id="tue">
+                        </div>
+                        <div class="field-row-stacked">
+                            <label for="wed">WED</label>
+                            <input type="text" id="wed">
+                        </div>
+                        <div class="field-row-stacked">
+                            <label for="thu">THU</label>
+                            <input type="text" id="thu">
+                        </div>
+                        <div class="field-row-stacked">
+                            <label for="fri">FRI</label>
+                            <input type="text" id="fri">
+                        </div>
+                        <div class="field-row-stacked">
+                            <label for="sat">SAT</label>
+                            <input type="text" id="sat">
+                        </div>
+                        <div class="field-row-stacked">
+                            <label for="sun">SUN</label>
+                            <input type="text" id="sun">
+                        </div>
+                    </fieldset>
+                </article>
+                <article role="tabpanel" hidden id="server">
+                    <div>
+                        <input type="checkbox" id="start_server">
+                        <label for="start_server">Start server on startup</label>
+                    </div>
+                    <div>
+                        <label for="port">Server port</label>
+                        <input type="text" id="port">
+                    </div>
+                </article>
+                <section class="field-row" style="justify-content: flex-end">
+                    <button onclick="proceed();">Save & Apply</button>
+                    <button>Cancel</button>
+                </section>
+            </div>
+        </div>
+        
+        <script src="/website/scripts.js"></script>
+        <script src="/website/xp.js"></script>
     </body>
 </html>

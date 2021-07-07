@@ -9,12 +9,14 @@ from schedule import *
 #pump = PWM(pi, 18, 20) 
 
 def main():
+    #Get the settings
     settings = Settings()
     #pump.change_percentage(settings.get_pump_intensity())
     #sch = Schedule(settings.get_schedule(), pump.start, pump.stop)
-    #sch.launch() 
+    #sch.launch()
+    #Launch the server if the settings say so
     if (settings.get_start_server()):
-        start_server(settings.get_port())
+        start_server()
 
 def close():
     pump.stop()

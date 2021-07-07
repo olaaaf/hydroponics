@@ -12,13 +12,21 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        self._set_response()
+        if ".css" in self.path:
+            self._set_response('text/css')
+        elif ".js" in self.path:
+            self._set_response('text/javascript')
+        elif ".json" in self.path:
+            self._set_response('application/json')
+        else:
+            self._set_response()
         file = None
         if self.path == '/' or self.path == '/index.html':   
             file = open('website/index.html', 'rb')
         else:
-            if os.path.isfile('website/' +self.path):
-                file = open('website/' + self.path, 'rb')
+            self.path = self.path[1:]
+            if os.path.isfile(self.path):
+                file = open(self.path, 'rb')
             else:
                 #Handle 404 Request
                 file = open('website/404.html', 'rb') 
