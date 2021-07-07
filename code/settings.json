@@ -1,1 +1,15 @@
-{"version": 0, "port": 80, "pump_intensity": 30, "start_server": true}
+{
+    "version": 0,
+    "port": 80,
+    "pump_intensity": 30,
+    "start_server": false,
+    "schedule": {
+        "mon": ["0-28800", "61200-86399"],
+        "tue": [],
+        "wed": ["52200-53580", "53700-53790"],
+        "thu": [],
+        "fri": [],
+        "sat": [],
+        "sun": []
+    }
+}

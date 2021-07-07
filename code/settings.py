@@ -16,6 +16,7 @@ default_settings = {
     "schedule" : {
         "mon" : [],
         "tue" : [],
+        "wed" : [],
         "thu" : [],
         "fri" : [],
         "sat" : [],
@@ -28,14 +29,12 @@ class Settings:
     
     def __init__(self):
         if not os.path.isfile('settings.json'):
-            with open('settings.json', 'w', encoding='utf-8') as file:
-                json.dump(default_settings, file)
+            self.save()
         else:
             with open('settings.json',  encoding='utf-8') as file:
                 self.current_settings = json.loads(file.read())
             if not self.check_current():
-                with open('settings.json', 'w', encoding='utf-8') as file:
-                    json.dump(self.current_settings, file)        
+                self.save()      
         
     #Check and correct version of settings
     #Return true if not modified
@@ -49,9 +48,15 @@ class Settings:
 
     def get_field(self, field:str):
         if field in self.current_settings:
-            return self.check_current[field]
+            return self.current_settings[field]
         else:
              raise Exception("No field called " + field + " in current_settings")
+
+    def get_schedule(self, day:str = ""):
+        if day == "":
+            return self.get_field("schedule")
+        else:
+            return self.get_field("schedule")[day]
 
     def get_port(self):
         return self.get_field("port")
@@ -61,3 +66,7 @@ class Settings:
     
     def get_start_server(self):
         return self.get_field("start_server")
+    
+    def save(self):
+        with open('settings.json', 'w', encoding='utf-8') as file:
+            file.write(json.dumps(self.current_settings, indent=4))
