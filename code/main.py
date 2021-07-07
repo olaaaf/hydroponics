@@ -16,12 +16,6 @@ def main():
     if (settings.get_start_server()):
         start_server(settings.get_port())
 
-def p():
-    print("start")
-
-def t():
-    print("stop")
-
 def close():
     pump.stop()
 
