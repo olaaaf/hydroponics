@@ -6,7 +6,7 @@ The heart of it is the water pump, which is turned on or off with a SSR, as the 
 
 The physical model - a literal PVC pipe connected by two 32 to 6 mm adapters (that were modeled and 3D printed) to connect them to the pump with industrial plastic tubing. Then small (37 mm in diameter) holes are drilled on one axis, which are to be used for "baskets" that will hold the plants with bentonite balls.
 
-Future changes and documentation will appear here.
+Please take a look at the wiki, as it contains most of the documentation
 
 ##### Dependencies
 **pigpio
