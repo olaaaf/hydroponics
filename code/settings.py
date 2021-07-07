@@ -12,7 +12,15 @@ default_settings = {
     "version": 0,
     "port": 80,
     "pump_intensity": 30,
-    "start_server" : True
+    "start_server" : True,
+    "schedule" : {
+        "mon" : [],
+        "tue" : [],
+        "thu" : [],
+        "fri" : [],
+        "sat" : [],
+        "sun" : []
+    }
 }
 
 class Settings:
