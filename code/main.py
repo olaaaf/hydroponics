@@ -16,7 +16,7 @@ def main():
     #sch.launch()
     #Launch the server if the settings say so
     if (settings.get_start_server()):
-        start_server()
+        start_server(settings)
 
 def close():
     pump.stop()

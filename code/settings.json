@@ -1,13 +1,12 @@
 {
     "version": 0,
     "port": 80,
-    "pump_intensity": 30,
+    "pump_intensity": 65,
     "start_server": true,
     "schedule": {
-        "mon": ["0-21600", "57010-86399"],
+        "mon": [],
         "tue": [],
-        "wed": ["27000-50400"],
-        "thu": [],
+        "wed": [],
         "fri": [],
         "sat": [],
         "sun": []

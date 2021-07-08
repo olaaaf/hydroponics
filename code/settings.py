@@ -33,18 +33,23 @@ class Settings:
         else:
             with open('settings.json',  encoding='utf-8') as file:
                 self.current_settings = json.loads(file.read())
-            if not self.check_current():
+            ifsave, self.current_settings = self.check_current(self.current_settings)
+            if ifsave:
                 self.save()      
+    
+    def load_new(self, settings):
+        self.current_settings = self.check_current(settings)[1]
+        self.save()
         
     #Check and correct version of settings
     #Return true if not modified
-    def check_current(self):
+    def check_current(self, settings):
         ret = True
         for key in default_settings:
-            if not key in self.current_settings:
+            if not key in settings:
                 ret = False
-                self.current_settings[key] = default_settings[key]
-        return ret
+                settings[key] = default_settings[key]
+        return ret, settings
 
     def get_field(self, field:str):
         if field in self.current_settings:

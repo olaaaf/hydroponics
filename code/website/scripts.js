@@ -21,7 +21,7 @@ function proceed () {
             sch[i].push(convertToSeconds(range[0]) + "-" + convertToSeconds(range[1]));
          }
     }
-    const params = {
+    let params = {
         "version":0,
         "port":port,
         "pump_intensity":pump_intensity,
@@ -47,6 +47,12 @@ function proceed () {
             console.log("Status: " + response.status);
         }
     });
+
+    if (port != window.location.port && !(window.location.port == "" && port == 80)){
+        console.log(port)
+        console.log(window.location.port)
+        window.location.port = port
+    }
 }
 
 function convertToSeconds(s){
