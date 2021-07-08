@@ -2,3 +2,6 @@
 .vscode/settings.json
 code/test.json
 code/settings.json
+code/__pycache__
+code/.vscode
+.vscode
