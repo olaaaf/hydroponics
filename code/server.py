@@ -4,6 +4,7 @@ import logging
 import os
 import json
 import pathlib
+import threading
 
 class Handler(BaseHTTPRequestHandler):
     
@@ -42,49 +43,35 @@ class Handler(BaseHTTPRequestHandler):
         data_json = json.loads(post_data.decode('utf8').replace("'", '"'))
         #Handle new settings
         global settings
-        port = settings.get_port()
         settings.load_new(data_json)
-        if port != settings.get_port():
-            restart_server()
         #Response to the client
         self._set_response('application/json')
         self.wfile.write(json.dumps(data_json).encode('utf-8'))
 
 server = None
-start = True
+running = False
 settings = {}
+thread = None
 
-def stop_server():
-    global server
-    server.server_close()
-
-def restart_server():
-    global start
-    start = True
-    stop_server()
+def start(port=80):
+    global thread, server, running
+    running = True
+    #Server addres with the port from settings
+    server_adress = ('', port)
+    #Set up the server with the custom handler class
+    server = HTTPServer(server_address=server_adress, RequestHandlerClass=Handler)
+    #Server will run on a sepparate thread - allowing us to kill it
+    thread = threading.Thread(target=server.serve_forever)
+    #Start the server
+    thread.start()
 
 def start_server(set:Settings):
-    global settings
-    global server
-    global start
-    
+    global settings, server, start
     settings = set
-    start = True
+    #Set the current working directory to wherever the code is located
     os.chdir(pathlib.Path(__file__).parent.resolve())
-    #Loop the server with restarting 
-    while start and settings.get_start_server():
-        start = False
-        server_adress = ('', settings.get_port())
-        server = HTTPServer(server_address=server_adress, RequestHandlerClass=Handler)
-        try:
-            server.serve_forever()
-        except KeyboardInterrupt:
-            pass
-        except OSError:
-            logging.info ("Stopped the server.")
-            if start:
-                logging.info ("Restarting with new settings.")
-    server.server_close()
+    if settings.get_start_server():
+        start(settings.get_port())
 
 if __name__=="__main__":
-    start_server()
+    start()

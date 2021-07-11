@@ -1,3 +1,4 @@
+from server import start_server
 import pigpio
 from pwm import *
 from server import *
@@ -15,10 +16,9 @@ def main():
     global settings, schedule, pump
     settings = Settings(update_settings)
     schedule = Schedule(settings.get_schedule(), pump.start, pump.stop)
-    update_settings()
-    #Launch the server if the settings say so
-    if (settings.get_start_server()):
-        start_server(settings)
+    schedule.launch()
+    #Launch the server
+    start_server(settings)
     
 
 def update_settings():

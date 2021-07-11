@@ -20,6 +20,8 @@ class Schedule:
     def launch(self):
         weekday = self.schedule[Schedule.get_weekday()]
         seconds = Schedule.get_seconds()
+        if len(weekday) == 0:
+            self.start()
         for t in weekday:
             start, stop = [int(x) for x in t.split('-')]
             if (stop < seconds):
