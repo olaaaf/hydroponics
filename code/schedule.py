@@ -3,8 +3,8 @@ import datetime
 
 class Schedule:
     
-    def __init__(self, settings:dict, start_function, stop_function):
-        self.schedule = settings
+    def __init__(self, sch:dict, start_function, stop_function):
+        self.schedule = sch
         self.start = start_function
         self.stop = stop_function
         self.running = True    
@@ -50,7 +50,7 @@ class Schedule:
         self.running = not self.running
         self.launch()
     
-    def update_settings(self, settings:dict):
-        self.schedule = settings
+    def update_schedule(self, sch:dict):
+        self.schedule = sch
         self.launch()
     

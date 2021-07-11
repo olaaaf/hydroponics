@@ -26,8 +26,10 @@ default_settings = {
 
 class Settings:
     current_settings = default_settings
+    update = None
     
-    def __init__(self):
+    def __init__(self, update_function):
+        self.update = update_function
         if not os.path.isfile('settings.json'):
             self.save()
         else:
@@ -35,11 +37,14 @@ class Settings:
                 self.current_settings = json.loads(file.read())
             ifsave, self.current_settings = self.check_current(self.current_settings)
             if ifsave:
-                self.save()      
+                self.save()
+        self.update()      
     
     def load_new(self, settings):
         self.current_settings = self.check_current(settings)[1]
         self.save()
+        #Launch update parent update function on new settings
+        self.update()
         
     #Check and correct version of settings
     #Return true if not modified
