@@ -38,7 +38,6 @@ class Settings:
             ifsave, self.current_settings = self.check_current(self.current_settings)
             if ifsave:
                 self.save()
-        self.update()      
     
     def load_new(self, settings):
         self.current_settings = self.check_current(settings)[1]
