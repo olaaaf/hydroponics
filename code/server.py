@@ -42,8 +42,10 @@ class Handler(BaseHTTPRequestHandler):
         data_json = json.loads(post_data.decode('utf8').replace("'", '"'))
         #Handle new settings
         global settings
+        port = settings.get_port()
         settings.load_new(data_json)
-        restart_server()
+        if port != settings.get_port():
+            restart_server()
         #Response to the client
         self._set_response('application/json')
         self.wfile.write(json.dumps(data_json).encode('utf-8'))
