@@ -1,8 +1,10 @@
+from server import start_server
 import pigpio
 from pwm import *
 from server import *
 from settings import *
 from schedule import *
+import logging
 
 pi = pigpio.pi()
 pump = PWM(pi, 18, 20) 
@@ -13,12 +15,10 @@ def main():
     #Get the settings
     global settings, schedule, pump
     settings = Settings(update_settings)
-    update_settings()
     schedule = Schedule(settings.get_schedule(), pump.start, pump.stop)
     schedule.launch()
-    #Launch the server if the settings say so
-    if (settings.get_start_server()):
-        start_server(settings)
+    #Launch the server
+    start_server(settings)
     
 
 def update_settings():
@@ -33,5 +33,9 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        close()        
-        print ("Pumped turned off")
+        close()
+        logging.info('Keyboard interrupt. Shutting down')
+    except Exception as e:
+        logging.error('Shutting down due to unknown error: "' + str(e) + '"')
+        close()
+    close()
