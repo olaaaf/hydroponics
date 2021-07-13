@@ -19,6 +19,7 @@ class Schedule:
         
     def launch(self):
         weekday = self.schedule[Schedule.get_weekday()]
+        print(weekday)
         seconds = Schedule.get_seconds()
         for t in weekday:
             start, stop = [int(x) for x in t.split('-')]
