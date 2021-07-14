@@ -16,7 +16,7 @@ def main():
     global settings, schedule, pump
     settings = Settings(update_settings)
     schedule = Schedule(settings.get_schedule(), pump.start, pump.stop)
-    schedule.launch()
+    schedule.next()
     #Launch the server
     start_server(settings)
     

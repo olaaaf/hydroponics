@@ -30,7 +30,7 @@ function proceed () {
             "mon": sch[0],
             "tue": sch[1],
             "wed": sch[2],
-            "tue": sch[3],
+            "thu": sch[3],
             "fri": sch[4],
             "sat": sch[5],
             "sun": sch[6]
