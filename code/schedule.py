@@ -20,13 +20,7 @@ class Schedule:
         days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
         weekday_num = datetime.datetime.today().weekday()
         
-<<<<<<< HEAD
         i = weekday_num
-=======
-    def launch(self):
-        weekday = self.schedule[Schedule.get_weekday()]
-        print(weekday)
->>>>>>> c2d661f1ef94a122abcf127927908a51e6f20dfb
         seconds = Schedule.get_seconds()
         surplus = 0
         #Start the pump
