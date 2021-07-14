@@ -5,6 +5,7 @@ from server import *
 from settings import *
 from schedule import *
 import logging
+import threading
 
 pi = pigpio.pi()
 pump = PWM(pi, 18, 20) 
@@ -28,7 +29,7 @@ def update_settings():
 
 def close():
     pump.stop()
-
+    
 if __name__ == '__main__':
     try:
         main()
@@ -38,4 +39,3 @@ if __name__ == '__main__':
     except Exception as e:
         logging.error('Shutting down due to unknown error: "' + str(e) + '"')
         close()
-    close()

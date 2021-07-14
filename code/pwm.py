@@ -21,8 +21,8 @@ class PWM:
         self.pi.write(self.port, 0)
 
     def change_percentage(self, percentage):
-        self.percentage = percentage 
-        self.start()
+        self.stop()
+        self.percentage = percentage
 
     def start(self):
         self.on = True
