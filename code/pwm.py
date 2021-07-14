@@ -47,3 +47,27 @@ class PWM:
             time.sleep((self.percentage / 100.0) / self.frequency)
             self.pi.write(self.port, 0)
             time.sleep((1.0 - self.percentage / 100.0) / self.frequency)
+
+
+class SoftwarePWM:
+    
+    def __init__(self, delay, part, start, stop) -> None:
+        self.delay = delay
+        self.part = part
+        self.start = start
+        self.stop = stop
+        self.going = False
+    
+    def launch(self):
+        self.going = True
+        threading.Thread(self.updt)
+    
+    def abort(self):
+        self.going = False
+    
+    def updt(self):
+        while (self.going):
+            self.start()
+            time.sleep((self.part / 100.0) * self.delay)
+            self.stop()
+            time.sleep((1.0 - self.part / 100.0) * self.delay)

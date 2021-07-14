@@ -15,8 +15,9 @@ schedule = None
 def main():
     #Get the settings
     global settings, schedule, pump
+    sft = SoftwarePWM(7200, 50, pump.start, pump.stop)
     settings = Settings(update_settings)
-    schedule = Schedule(settings.get_schedule(), pump.start, pump.stop)
+    schedule = Schedule(settings.get_schedule(), sft.launch, sft.abort)
     schedule.next()
     #Launch the server
     start_server(settings)

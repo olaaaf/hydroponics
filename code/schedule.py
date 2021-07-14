@@ -24,7 +24,7 @@ class Schedule:
         seconds = Schedule.get_seconds()
         surplus = 0
         #Start the pump
-        #self.start()
+        self.start()
         for i in range(weekday_num, 7 + weekday_num):
             weekday = self.schedule[days[overflow(i, 0, 6)]]
             surplus = 86400 * (weekday_num - i)
