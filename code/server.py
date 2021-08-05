@@ -5,6 +5,7 @@ import os
 import json
 import pathlib
 import threading
+from debug import Debug
 
 class Handler(BaseHTTPRequestHandler):
     
@@ -42,19 +43,23 @@ class Handler(BaseHTTPRequestHandler):
         #Convert data to json
         data_json = json.loads(post_data.decode('utf8').replace("'", '"'))
         #Handle new settings
-        global settings
+        global settings, debug
         settings.load_new(data_json)
+        if debug:
+            Debug.write_line(json.dumps(settings.current_settings), "Settings")
         #Response to the client
         self._set_response('application/json')
         self.wfile.write(json.dumps(data_json).encode('utf-8'))
 
 server = None
 running = False
-settings = {}
+settings = None
 thread = None
+debug = False
 
-def start(port=80):
-    global thread, server, running
+def start(port=80, dbg=False):
+    global thread, server, running, debug
+    debug = dbg
     running = True
     #Server addres with the port from settings
     server_adress = ('', port)
@@ -71,7 +76,7 @@ def start_server(set:Settings):
     #Set the current working directory to wherever the code is located
     os.chdir(pathlib.Path(__file__).parent.resolve())
     if settings.get_start_server():
-        start(settings.get_port())
+        start(settings.get_port(), settings.get_debug())
 
 if __name__=="__main__":
-    start()
+    start(80, True)

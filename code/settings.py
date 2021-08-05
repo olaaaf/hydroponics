@@ -10,6 +10,7 @@ os.chdir(pathlib.Path(__file__).parent.resolve())
 
 default_settings = {
     "version": 0,
+    "debug": False,
     "port": 80,
     "pump_intensity": 30,
     "start_server" : True,
@@ -35,25 +36,29 @@ class Settings:
         else:
             with open('settings.json',  encoding='utf-8') as file:
                 self.current_settings = json.loads(file.read())
-            ifsave, self.current_settings = self.check_current(self.current_settings)
+            ifsave, self.current_settings = self.check_default(self.current_settings)
             if ifsave:
                 self.save()
     
     def load_new(self, settings):
-        self.current_settings = self.check_current(settings)[1]
+        self.current_settings = Settings.check_with(settings, self.current_settings)[1]
         self.save()
         #Launch update parent update function on new settings
         self.update()
         
+    
+    def check_with(new_settings, source):
+        ret = True
+        for key in source:
+            if not key in new_settings:
+                ret = False
+                new_settings[key] = source[key]
+        return ret, new_settings
+    
     #Check and correct version of settings
     #Return true if not modified
-    def check_current(self, settings):
-        ret = True
-        for key in default_settings:
-            if not key in settings:
-                ret = False
-                settings[key] = default_settings[key]
-        return ret, settings
+    def check_default(self, settings):
+        return Settings.check_with(settings, default_settings)
 
     def get_field(self, field:str):
         if field in self.current_settings:
@@ -66,6 +71,9 @@ class Settings:
             return self.get_field("schedule")
         else:
             return self.get_field("schedule")[day]
+
+    def get_debug(self):
+        return self.get_field("debug")
 
     def get_port(self):
         return self.get_field("port")
