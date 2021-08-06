@@ -1,6 +1,7 @@
 const weekdays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 
 function proceed () {
+    //Get the values from the webpage
     let port = parseInt(document.getElementById("port").value, 10)
     let pump_intensity = parseInt(document.getElementById("intensity").value, 10)
     let start_server = document.getElementById("start_server").checked

@@ -19,3 +19,5 @@ cd pigpio-master
 make
 sudo make install
 ```
+
+

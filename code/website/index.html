@@ -2,82 +2,14 @@
 <html>
     <head>
         <title>Hydroponics</title>
-        <link rel="stylesheet" href="/website/XP.css">
+
     </head>
     <body onload="run();"> 
-        
-        <div class="window" style="overflow-y:auto; height:80%; width: 80%; position: fixed; left: 50%; transform: translate(-50%, 0%);">
-            <div class="title-bar">
-                <div class="title-bar-text">Settings</div>
-                <div class="title-bar-controls">
-                    <button aria-label="Help"></button>
-                </div>
-            </div>
-            <div class="window-body">
-                <menu role="tablist">
-                    <button aria-selected="true" aria-controls="pump">Pump</button>
-                    <button aria-controls="schedule">Schedule</button>
-                    <button aria-controls="server">Server</button>
-                </menu>
-                <article role="tabpanel" id="pump">
-                    <div class="field-row" style="width: 40%">
-                        <label for="range25">Pump intensity:</label>
-                        <label for="range26">0%</label>
-                        <input id="intensity" type="range" min="0" max="100" value="5" />
-                        <label for="range27">100%</label>
-                    </div>
-                </article>
-                <article role="tabpanel" hidden id="schedule">
-                    <fieldset>
-                        <legend>When to turn off the pump</legend>
-                        <p>Add OFF times in format: <i>HH:MM:SS-HH:MM:SS,HH:MM:SS-HH:MM:SS</i></p>
-                        <div class="field-row-stacked" style="width: 100%;">
-                            <label for="mon">MON</label>
-                            <input type="text" id="mon">
-                        </div>
-                        <div class="field-row-stacked">
-                            <label for="tue">TUE</label>
-                            <input type="text" id="tue">
-                        </div>
-                        <div class="field-row-stacked">
-                            <label for="wed">WED</label>
-                            <input type="text" id="wed">
-                        </div>
-                        <div class="field-row-stacked">
-                            <label for="thu">THU</label>
-                            <input type="text" id="thu">
-                        </div>
-                        <div class="field-row-stacked">
-                            <label for="fri">FRI</label>
-                            <input type="text" id="fri">
-                        </div>
-                        <div class="field-row-stacked">
-                            <label for="sat">SAT</label>
-                            <input type="text" id="sat">
-                        </div>
-                        <div class="field-row-stacked">
-                            <label for="sun">SUN</label>
-                            <input type="text" id="sun">
-                        </div>
-                    </fieldset>
-                </article>
-                <article role="tabpanel" hidden id="server">
-                    <div>
-                        <input type="checkbox" id="start_server">
-                        <label for="start_server">Start server on startup</label>
-                    </div>
-                    <div>
-                        <label for="port">Server port</label>
-                        <input type="text" disabled id="port">
-                    </div>
-                </article>
-                <section class="field-row" style="justify-content: flex-end">
-                    <button onclick="proceed();">Save & Apply</button>
-                    <button>Cancel</button>
-                </section>
-            </div>
+        <div class="title">
+        <img src="/website/wave.svg">
         </div>
         
+        <div class="icons">Icons made by <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         <script src="/website/scripts.js"></script>
         <script src="/website/xp.js"></script>
     </body>
