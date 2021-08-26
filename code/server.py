@@ -15,12 +15,17 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        print(self.path)
         if ".css" in self.path:
             self._set_response('text/css')
         elif ".js" in self.path:
             self._set_response('text/javascript')
         elif ".json" in self.path:
             self._set_response('application/json')
+        elif ".svg" in self.path:
+            self._set_response('image/svg+xml')
+        elif ".ttf" in self.path:
+            self._set_response('font/ttf')
         else:
             self._set_response()
         file = None

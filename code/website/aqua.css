@@ -1,8 +1,62 @@
-.title{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+@font-face {
+    font-family: hahmlet-thin;
+    src: url('/website/Hahmlet-Thin.ttf');
 }
 
+@font-face {
+    font-family: hahmlet-bold;
+    src: url('/website/Hahmlet-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: dosis-bold;
+    src: url('/website/Dosis-ExtraBold.ttf');
+}
+
+@font-face {
+    font-family: dosis-light;
+    src: url('/website/Dosis-Light.ttf');
+}
+
+.center{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.title{
+    font-family: dosis-bold;
+    font-size: 40px;
+    color: #1E5763;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+    position: relative;
+    left: 15px;
+}
+
+.icon{
+    position:relative;
+    left: -15px;
+    top: -86px;
+    width: 60px;
+    height: 60px;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#welcome {
+    font-family: hahmlet-bold;
+    font-size: 25px;
+    color: #2a2a2a;
+    text-shadow: 0px 0px 1px black;
+}
