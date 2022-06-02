@@ -9,8 +9,7 @@ The physical model - a literal PVC pipe connected by two 32 to 6 mm adapters (th
 Please take a look at the wiki, as it contains most of the documentation
 
 ##### Dependencies
-**pigpio
-**
+**pigpio**
 To install use:
 ```
 wget https://github.com/joan2937/pigpio/archive/master.zip
@@ -18,4 +17,16 @@ unzip master.zip
 cd pigpio-master
 make
 sudo make install
+```
+**postgresql**
+```commandline
+sudo apt install postgresql
+```
+load database from file:
+```commandline
+sudo -i -u postgres
+psql
+postgres=# create database aqua;
+postgres=# \q
+psql aqua < code/aqua.database
 ```

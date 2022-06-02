@@ -6,6 +6,7 @@ import json
 import pathlib
 import threading
 from debug import Debug
+import django as dj
 
 class Handler(BaseHTTPRequestHandler):
     

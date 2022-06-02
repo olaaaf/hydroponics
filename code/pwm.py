@@ -60,7 +60,7 @@ class SoftwarePWM:
     
     def launch(self):
         self.going = True
-        threading.Thread(self.updt)
+        threading.Thread(target=self.updt)
     
     def abort(self):
         self.going = False
